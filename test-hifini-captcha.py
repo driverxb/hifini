@@ -1,6 +1,6 @@
 # coding=utf-8
 # 编程练习：滑块验证码
-# python 3.8.18+selenium 4.15.2
+# python 3.8.18+selenium 4.15.2+ddddocr 1.4.10+Pillow 9.5.0
 
 from selenium.webdriver.common.by import By
 from selenium import webdriver
@@ -126,14 +126,14 @@ if __name__ == '__main__':
         with open('background.png', 'rb') as f:
             background_bytes = f.read()
         res = det.slide_match(target_bytes, background_bytes, simple_target=True)  # 简单图片带参数simple_target
-        print(res)
+        # print(res)
         distance = res['target'][0]
-        print(distance)
+        # print(distance)
         # 输入滑块移动距离参数，实现模拟拖动滑块拼图验证
         run_slidingblock(distance)
         time.sleep(3)
         captcha_text = driver.find_element(By.ID, 'captcha').text
-        print(captcha_text)
+        # print(captcha_text)
         if captcha_text == '验证成功':
             success_flag = False
             break
@@ -142,17 +142,17 @@ if __name__ == '__main__':
     driver.find_element(By.ID, 'submit').click()
     driver.implicitly_wait(10)
     # 找到签到标签并进行签到操作
-    sg_sign = driver.find_element(By.ID, "sg_sign")  
-    """"
+    sg_sign = driver.find_element(By.ID, 'sg_sign')
+    """
     time_now = time.strftime("%H:%M:%S",time.localtime())
     sg_sign.click()
-    
+
     """
     while True:
         time_now = time.strftime("%H:%M:%S", time.localtime())
         if time_now == "00:00:00":
             sg_sign.click() # 对签到标签进行点击操作
-            break # 退出循环 
+            break # 退出循环
 
     time.sleep(1)
     driver.save_screenshot(datetime.now().strftime("%Y-%m-%d-%H-%M-%S")+'.png') # 屏幕截图保存       
