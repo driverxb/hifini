@@ -152,6 +152,11 @@ if __name__ == '__main__':
         time_now = time.strftime("%H:%M:%S", time.localtime())
         if time_now == "00:00:00":
             sg_sign.click() # 对签到标签进行点击操作
+            #人机验证，拖动滑块移动实现
+            move_block = driver.find_element(By.CLASS_NAME, 'verify-move-block')
+            bar_area = driver.find_element(By.CLASS_NAME, 'verify-bar-area')
+            move_distance = bar_area.size['width'] - move_block.size['width']
+            run_slidingblock(move_distance)
             break # 退出循环
 
     time.sleep(1)
